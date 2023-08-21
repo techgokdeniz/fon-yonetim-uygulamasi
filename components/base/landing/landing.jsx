@@ -1,11 +1,8 @@
 import React from "react";
-import HomeImage from "@/assets/images/home.svg";
-import Image from "next/image";
-import HomeCard from "./homecard";
-import { HomeCardData } from "@/mocks/homeCardData";
 import HomeAnimation from "./homeanimation";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
+import HomeContent from "./homecard";
 
 const Landing = () => {
   return (
@@ -33,14 +30,7 @@ const Landing = () => {
         </div>
       </div>
       <div className="grid grid-cols-1 md:grid-cols-3 mt-10 gap-4">
-        {HomeCardData.map((item, index) => (
-          <HomeCard
-            key={index}
-            title={item.title}
-            description={item.description}
-            content={item.content}
-          />
-        ))}
+        <HomeContent />
       </div>
     </div>
   );

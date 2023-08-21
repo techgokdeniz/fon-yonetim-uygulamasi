@@ -4,9 +4,14 @@ import { Switch } from "@/components/ui/switch";
 import { cn } from "@/lib/utils";
 
 const ThemeChanger = () => {
-  const { theme, setTheme } = useTheme();
+  const { theme, setTheme, systemTheme } = useTheme();
 
   const toggleTheme = () => {
+    if (theme === "system") {
+      setTheme(systemTheme === "dark" ? "light" : "dark");
+      return;
+    }
+
     setTheme(theme === "dark" ? "light" : "dark");
   };
 

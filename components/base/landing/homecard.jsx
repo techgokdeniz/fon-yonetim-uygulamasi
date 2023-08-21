@@ -1,13 +1,36 @@
 import React from "react";
-import PropTypes from "prop-types";
+import propTypes from "prop-types";
 import {
   Card,
   CardContent,
   CardDescription,
-  CardFooter,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { useExchangeRates } from "@/hooks/useExchangeRates";
+import { useRouter } from "next/router";
+
+const HomeContent = () => {
+  const router = useRouter();
+
+  const { isLoading, error, data } = useExchangeRates();
+
+  if (isLoading) return <>Loading...</>;
+
+  if (error)
+    return <>Bir hata oluştu ekibimiz çözmeye çalışıyor : {error.message}</>;
+
+  return data.map((item, index) => {
+    return (
+      <HomeCard
+        key={index}
+        title={item.Isim}
+        description={item.Isim}
+        content={item.BanknoteBuying}
+      />
+    );
+  });
+};
 
 const HomeCard = ({ title, description, content }) => {
   return (
@@ -17,16 +40,16 @@ const HomeCard = ({ title, description, content }) => {
         <CardDescription>{description}</CardDescription>
       </CardHeader>
       <CardContent>
-        <p>{content}</p>
+        <p>{content.toFixed(2)}</p>
       </CardContent>
     </Card>
   );
 };
 
-HomeCard.PropTypes = {
-  title: PropTypes.string.isRequired,
-  description: PropTypes.string,
-  content: PropTypes.string,
+HomeCard.propTypes = {
+  title: propTypes.string.isRequired,
+  description: propTypes.string,
+  content: propTypes.number,
 };
 
-export default HomeCard;
+export default HomeContent;

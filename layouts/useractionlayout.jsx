@@ -5,7 +5,7 @@ import React from "react";
 const UserActionLayout = ({ children }) => {
   return (
     <div className="flex h-screen w-full">
-      <div className="h-full w-[400px] p-4 flex flex-col gap-4">
+      <div className="h-full w-[500px] p-4 flex flex-col gap-4">
         <div className="flex justify-between ">
           <Logo />
           <ThemeChanger />
@@ -14,7 +14,7 @@ const UserActionLayout = ({ children }) => {
           {children}
         </div>
       </div>
-      <div className="flex-1 bg-red-200 h-full p-4 hidden md:block user-action-background"></div>
+      <div className="flex-1  h-full hidden md:block user-action-background"></div>
     </div>
   );
 };
