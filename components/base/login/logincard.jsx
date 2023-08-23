@@ -10,19 +10,65 @@ import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/components/ui/use-toast";
+import { signIn } from "next-auth/react";
+import { z } from "zod";
+import { useRouter } from "next/navigation";
 
 const LoginCard = ({ title, description }) => {
   const { toast } = useToast();
+  const router = useRouter();
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const handleLogin = () => {
-    toast({
-      variant: "destructive",
-      title: "Login",
-      description: `Email: ${email} Password: ${password}`,
+  const handleLogin = async () => {
+    // Zod şema tanımlama
+    const loginSchema = z.object({
+      email: z.string().email("Geçerli bir email adresi giriniz."),
+      password: z.string().min(6, "Şifre en az 6 karakter olmalıdır."),
     });
+
+    try {
+      // Zod şemasını kullanarak email ve şifre kontrolü yapma
+      try {
+        loginSchema.parse({ email, password });
+      } catch (error) {
+        return toast({
+          description: error.errors[0].message,
+          title: "Başarısız",
+          variant: "destructive",
+        });
+      }
+
+      // Kullanıcı girişi
+      const user = await signIn("credentials", {
+        email,
+        password,
+        redirect: false,
+      });
+
+      if (!user.error) {
+        toast({
+          title: "Başarılı",
+          variant: "success",
+          description: "Başarılı bir şekilde giriş yapıldı.",
+        });
+
+        router.push("/dashboard");
+      } else {
+        toast({
+          title: "Başarısız",
+          variant: "destructive",
+          description: "Giriş yapılamadı.",
+        });
+      }
+    } catch (error) {
+      toast({
+        description: error.message,
+        title: "Başarısız",
+        variant: "destructive",
+      });
+    }
   };
 
   return (
