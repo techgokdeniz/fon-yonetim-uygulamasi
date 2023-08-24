@@ -3,6 +3,7 @@ import {
   Card,
   CardContent,
   CardDescription,
+  CardFooter,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
@@ -13,6 +14,7 @@ import { useToast } from "@/components/ui/use-toast";
 import { signIn } from "next-auth/react";
 import { z } from "zod";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 const LoginCard = ({ title, description }) => {
   const { toast } = useToast();
@@ -84,20 +86,28 @@ const LoginCard = ({ title, description }) => {
             onChange={(e) => setEmail(e.target.value)}
             type="email"
             id="email"
-            placeholder="Email"
+            placeholder="admin@fonyonetim.app"
           />
         </div>
         <div>
-          <Label htmlFor="password">Password</Label>
+          <Label htmlFor="password">Şifre</Label>
           <Input
             onChange={(e) => setPassword(e.target.value)}
             type="password"
             id="password"
-            placeholder="password"
+            placeholder="*******"
           />
         </div>
-        <Button onClick={handleLogin}>Log in</Button>
+        <Button onClick={handleLogin}>Giriş Yap</Button>
       </CardContent>
+      <CardFooter>
+        <div className="flex justify-center gap-1 items-center w-full">
+          Bir hesabınız yok mu?{" "}
+          <Link href="/register">
+            <span className="font-semibold text-red-800">Kayıt Ol</span>
+          </Link>
+        </div>
+      </CardFooter>
     </Card>
   );
 };

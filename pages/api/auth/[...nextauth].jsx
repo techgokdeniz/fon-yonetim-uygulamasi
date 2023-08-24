@@ -22,7 +22,14 @@ export const authOptions = {
         )
           .then((userCredential) => {
             if (userCredential.user) {
-              return true;
+              let user = {
+                id: userCredential.user.reloadUserInfo.localId,
+                name: userCredential.user.reloadUserInfo.displayName,
+                email: userCredential.user.reloadUserInfo.email,
+                image: userCredential.user.reloadUserInfo.photoURL,
+              };
+
+              return user;
             }
             return false;
           })
@@ -32,5 +39,9 @@ export const authOptions = {
       },
     }),
   ],
+  session: {
+    strategy: "jwt",
+    maxAge: 4 * 60 * 60, //4 saat
+  },
 };
 export default NextAuth(authOptions);

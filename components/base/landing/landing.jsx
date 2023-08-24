@@ -6,7 +6,7 @@ import HomeContent from "./homecard";
 
 const Landing = () => {
   return (
-    <div className="w-full flex flex-col gap-4 md:pt-24 pt-10">
+    <div className="w-full flex flex-col gap-4 md:pt-24 pt-4">
       <div className="flex gap-4 justify-center flex-col md:flex-row">
         <div className="w-full flex flex-col gap-4 min-h-[400px] justify-center">
           <h1 className="text-4xl font-bold">

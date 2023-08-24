@@ -83,6 +83,10 @@ body {
     @apply bg-background text-foreground;
   }
 
+  .dark-text {
+    @apply text-[#020817];
+  }
+
   .white {
     @apply bg-white text-black;
   }

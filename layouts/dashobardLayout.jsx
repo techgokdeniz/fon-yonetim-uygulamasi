@@ -1,10 +1,11 @@
 import { useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
+import DashboardNavbar from "@/components/base/dashboard/navbar";
 
 const DashobardLayout = ({ children }) => {
   const { push } = useRouter();
 
-  const { status } = useSession({
+  const { status, data: session } = useSession({
     required: true,
     onUnauthenticated() {
       push("/login");
@@ -18,7 +19,12 @@ const DashobardLayout = ({ children }) => {
       </div>
     );
 
-  return <div className="p-8">{children}</div>;
+  return (
+    <div className="flex">
+      <DashboardNavbar />
+      <div className="flex-1 p-4">{children}</div>
+    </div>
+  );
 };
 
 export default DashobardLayout;

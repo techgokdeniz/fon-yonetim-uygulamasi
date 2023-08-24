@@ -5,7 +5,10 @@ import DashobardLayout from "@/layouts/dashobardLayout";
 const DashboardPage = () => {
   return (
     <DashobardLayout>
-      <button className="text-black" onClick={() => signOut()}>
+      <button
+        className="text-black dark:text-white dark:dark"
+        onClick={() => signOut()}
+      >
         Logout
       </button>
     </DashobardLayout>

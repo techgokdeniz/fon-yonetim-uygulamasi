@@ -6,8 +6,8 @@ const Index = () => {
   return (
     <UserActionLayout>
       <LoginCard
-        title={"Login"}
-        description={"Fon Yönetim Uygulaması giriş ekranı"}
+        title={"Giriş Yap"}
+        description={"Fon Yönetim Uygulaması Giriş Ekranı"}
       />
     </UserActionLayout>
   );
