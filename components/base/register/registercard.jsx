@@ -106,7 +106,9 @@ const RegisterCard = ({ title, description }) => {
             placeholder="*******"
           />
         </div>
-        <Button onClick={handleRegister}>Kayıt Ol</Button>
+        <Button onClick={handleRegister} disabled>
+          Kayıt Ol
+        </Button>
       </CardContent>
       <CardFooter>
         <div className="flex justify-center gap-1 items-center w-full">
