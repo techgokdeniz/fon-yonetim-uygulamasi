@@ -1,4 +1,4 @@
-export default async function useTefasFetch(endpoint, body) {
+export default async function baseTefasFetch(endpoint, body) {
   const { NEXT_PUBLIC_TEFAS_BASE_URL } = process.env;
 
   try {

@@ -1,7 +1,10 @@
-import useTefasFetch from "@/hooks/useFetch";
+import baseTefasFetch from "@/hooks/baseFetch";
 
 export default async function handler(req, res) {
-  const { data, error } = await useTefasFetch("/DB/getAllMainCharts", "dil=TR");
+  const { data, error } = await baseTefasFetch(
+    "/DB/getAllMainCharts",
+    "dil=TR"
+  );
 
   if (error) {
     return res.status(500).json({
