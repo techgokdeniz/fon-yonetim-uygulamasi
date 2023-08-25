@@ -27,26 +27,29 @@ const NavbarHome = () => {
         <ThemeChanger />
       </div>
       <div className="block relative md:hidden">
-        <Menu
-          size={32}
-          onClick={handleMenu}
-          className={`z-50 ${navbarOpen ? "fixed right-6 " : "relative"}`}
-        />
         {navbarOpen && (
-          <div className="fixed inset-0 bg-black/50  z-40 flex items-center justify-end ">
-            <div className="dark:dark bg-white text-black dark:text-white w-64 h-screen flex justify-center items-center px-4 ">
-              <div className="flex flex-col gap-4 w-full">
-                <Link href="/login">
-                  <Button className="w-full">Giriş Yap</Button>
-                </Link>
-                <Link href="/register">
-                  <Button className="w-full">Kayıt Ol</Button>
-                </Link>
-                <ThemeChanger />
+          <div>
+            <Menu
+              size={32}
+              onClick={handleMenu}
+              className={`z-50 fixed top-10 right-6 `}
+            />
+            <div className="fixed inset-0 bg-black/50  z-40 flex items-center justify-end ">
+              <div className="dark:dark bg-white text-black dark:text-white w-64 h-screen flex justify-center items-center px-4 ">
+                <div className="flex flex-col gap-4 w-full">
+                  <Link href="/login">
+                    <Button className="w-full">Giriş Yap</Button>
+                  </Link>
+                  <Link href="/register">
+                    <Button className="w-full">Kayıt Ol</Button>
+                  </Link>
+                  <ThemeChanger />
+                </div>
               </div>
             </div>
           </div>
         )}
+        {!navbarOpen && <Menu size={32} onClick={handleMenu} />}
       </div>
     </nav>
   );

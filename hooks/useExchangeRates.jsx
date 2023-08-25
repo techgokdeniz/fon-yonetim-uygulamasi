@@ -9,7 +9,10 @@ export function useExchangeRates() {
 
   async function fetchRate() {
     try {
-      const response = await fetch("https://hasanadiguzel.com.tr/api/kurgetir");
+      const response = await fetch(
+        "https://hasanadiguzel.com.tr/api/kurgetir",
+        { cache: "no-cache" }
+      );
       const data = await response.json();
 
       let exchangeRate = data.TCMB_AnlikKurBilgileri;

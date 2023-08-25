@@ -1,15 +1,18 @@
 import { useTheme } from "next-themes";
-import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
-import { cn } from "@/lib/utils";
+import { useState, useEffect } from "react";
 
 const ThemeChanger = () => {
   const { theme, setTheme, systemTheme } = useTheme();
+  const [checked, setChecked] = useState(false);
+
+  useEffect(() => {
+    setChecked(theme === "dark");
+  }, [theme]);
 
   const toggleTheme = () => {
     if (theme === "system") {
-      setTheme(systemTheme === "dark" ? "light" : "dark");
-      return;
+      return setTheme(systemTheme === "dark" ? "light" : "dark");
     }
 
     setTheme(theme === "dark" ? "light" : "dark");
@@ -17,7 +20,7 @@ const ThemeChanger = () => {
 
   return (
     <div className="flex items-center space-x-2">
-      <Switch onCheckedChange={toggleTheme} />
+      <Switch checked={checked} onCheckedChange={toggleTheme} />
     </div>
   );
 };

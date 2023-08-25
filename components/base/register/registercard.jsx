@@ -17,30 +17,50 @@ import Link from "next/link";
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { auth } from "@/config/firebase";
 
+const registerSchema = z.object({
+  name: z.string().nonempty().min(2),
+  surname: z.string().nonempty().min(2),
+  email: z.string().email(),
+  password: z.string().min(6),
+});
+
 const RegisterCard = ({ title, description }) => {
   const { toast } = useToast();
-  const router = useRouter();
 
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
   const [name, setName] = useState("");
   const [surname, setSurname] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
   const handleRegister = async () => {
-    const data = await createUserWithEmailAndPassword(auth, email, password);
-    const user = await updateProfile(data.user, {
-      displayName: `${name} ${surname}`,
-    });
+    try {
+      try {
+        registerSchema.parse({ name, surname, email, password });
+      } catch (error) {
+        return toast({
+          description: error.errors[0].message + " " + error.errors[0].path,
+          title: "Başarısız",
+          variant: "destructive",
+        });
+      }
 
-    const getUser = await auth.currentUser;
+      const data = await createUserWithEmailAndPassword(auth, email, password);
+      await updateProfile(data.user, {
+        displayName: `${name} ${surname}`,
+      });
 
-    console.log(getUser);
-
-    toast({
-      title: "Başarılı",
-      variant: "success",
-      description: "Başarılı bir şekilde kayıt olundu.",
-    });
+      return toast({
+        title: "Başarılı",
+        variant: "success",
+        description: "Başarılı bir şekilde kayıt olundu.",
+      });
+    } catch (error) {
+      return toast({
+        title: "Hata",
+        variant: "destructive",
+        description: "Bir hata oluştu",
+      });
+    }
   };
 
   return (
