@@ -1,8 +1,15 @@
+import { HttpsProxyAgent } from "https-proxy-agent";
+
+const proxy = process.env.NEXT_PUBLIC_HTTP_PROXY || "";
+
+const agent = proxy ? new HttpsProxyAgent(proxy) : null;
+
 export default async function baseTefasFetch(endpoint, body) {
   try {
     const response = await fetch(
       `${process.env.NEXT_PUBLIC_TEFAS_BASE_URL}${endpoint}`,
       {
+        agent: agent,
         cache: "no-cache",
         method: "POST",
         body: body,
