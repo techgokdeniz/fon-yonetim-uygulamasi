@@ -24,12 +24,12 @@ export default async function baseTefasFetch(endpoint, body) {
     );
 
     if (response.ok) {
-      const data = response.data;
-      return { data };
+      const data = await response.json();
+      return { data: data };
     } else {
       return { error: response.status };
     }
   } catch (err) {
-    return { error: err.message };
+    return { error: err };
   }
 }
