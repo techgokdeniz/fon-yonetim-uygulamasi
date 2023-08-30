@@ -1,15 +1,18 @@
-import { HttpsProxyAgent } from "https-proxy-agent";
-
-const proxy = process.env.NEXT_PUBLIC_HTTP_PROXY || "";
-
-const agent = proxy ? new HttpsProxyAgent(proxy) : null;
+import { Agent } from "undici";
+import crypto from "crypto";
 
 export default async function baseTefasFetch(endpoint, body) {
   try {
     const response = await fetch(
       `${process.env.NEXT_PUBLIC_TEFAS_BASE_URL}${endpoint}`,
       {
-        agent: agent,
+        mode: "cors",
+        dispatcher: new Agent({
+          connect: {
+            rejectUnauthorized: false,
+            secureOptions: crypto.constants.SSL_OP_LEGACY_SERVER_CONNECT,
+          },
+        }),
         cache: "no-cache",
         method: "POST",
         body: body,
@@ -30,6 +33,6 @@ export default async function baseTefasFetch(endpoint, body) {
       return { error: response.status };
     }
   } catch (err) {
-    return { error: err };
+    return { error: err.message };
   }
 }
