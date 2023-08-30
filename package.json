@@ -21,6 +21,7 @@
     "eslint": "8.47.0",
     "eslint-config-next": "13.4.16",
     "firebase": "^10.3.0",
+    "https-proxy-agent": "^7.0.1",
     "lottie-react": "^2.4.0",
     "lucide-react": "^0.268.0",
     "next": "13.4.16",
