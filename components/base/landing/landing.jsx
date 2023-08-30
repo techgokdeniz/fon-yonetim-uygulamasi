@@ -3,6 +3,7 @@ import HomeAnimation from "./homeanimation";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import HomeContent from "./homecard";
+import FaqSection from "./faqsection";
 
 const Landing = () => {
   return (
@@ -31,6 +32,12 @@ const Landing = () => {
       </div>
       <div className="grid grid-cols-1 md:grid-cols-3 mt-10 gap-4">
         <HomeContent />
+      </div>
+      <div className="w-full flex flex-col gap-4 mt-8 rounded-lg dark:border justify-center dark:dark p-4">
+        <h1 className="text-4xl font-bold text-center">
+          Sıkça Sorulan Sorular
+        </h1>
+        <FaqSection />
       </div>
     </div>
   );
