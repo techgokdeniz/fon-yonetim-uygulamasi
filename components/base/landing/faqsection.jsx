@@ -9,7 +9,7 @@ import FaqQuestions from "@/mocks/faqQuestions";
 
 const FaqSection = () => {
   return FaqQuestions.map((question) => (
-    <Accordion id={question.id} type="single" collapsible>
+    <Accordion key={question.id} id={question.id} type="single" collapsible>
       <AccordionItem value={question.id}>
         <AccordionTrigger>
           <h1 className="text-xl font-semibold">{question.question}</h1>
