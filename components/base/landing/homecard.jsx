@@ -8,14 +8,20 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { useExchangeRates } from "@/hooks/useExchangeRates";
-import { useRouter } from "next/router";
+import { Skeleton } from "@/components/ui/skeleton";
 
 const HomeContent = () => {
-  const router = useRouter();
-
   const { isLoading, error, data } = useExchangeRates();
 
-  if (isLoading) return <>Loading...</>;
+  if (isLoading) {
+    return (
+      <>
+        <Skeleton className="w-full h-[150px]" />
+        <Skeleton className="w-full h-[150px]" />
+        <Skeleton className="w-full h-[150px]" />
+      </>
+    );
+  }
 
   if (error)
     return <>Bir hata oluştu ekibimiz çözmeye çalışıyor : {error.message}</>;

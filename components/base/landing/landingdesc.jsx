@@ -1,14 +1,14 @@
 import React from "react";
-import LandingImageOne from "@/assets/images/landing/home.jpg";
-import LandingImageTwo from "@/assets/images/landing/hometwo.jpg";
-import Image from "next/image";
+import HomeAnimationOne from "@/mocks/homeanimationone.json";
+import HomeAnimationTwo from "@/mocks/homeanimationotwo.json";
+import Lottie from "lottie-react";
 
 const LandingGrid = () => {
   return (
-    <div className="flex flex-col gap-4 ">
-      <div className="flex flex-col border dark:dark p-4 rounded-lg items-center md:items-center md:flex-row gap-4 justify-between">
+    <div className="flex flex-col gap-12 ">
+      <div className="flex flex-col border dark:dark p-4 rounded-lg items-start md:items-center md:flex-row gap-4 justify-between">
         <div className="flex flex-col max-w-xl">
-          <h1 className="text-2xl font-bold">Yatırım Fonları Nedir?</h1>
+          <h1 className="text-xl font-bold">Yatırım Fonları Nedir?</h1>
           <p className="text-lg md:mt-4">
             Yatırım fonları, birden fazla yatırımcının bir araya gelerek toplu
             bir şekilde yatırım yapmasını sağlayan finansal araçlardır.
@@ -26,16 +26,11 @@ const LandingGrid = () => {
             çeşitlendirmelerine ve risklerini dağıtmalarına olanak tanır.
           </p>
         </div>
-        <Image
-          src={LandingImageOne}
-          width={500}
-          className="rounded-md"
-          alt="landing"
-        />
+        <Lottie animationData={HomeAnimationOne} className="max-w-[400px]" />
       </div>
-      <div className="flex flex-col border dark:dark p-4 rounded-lg items-center md:items-start md:flex-row gap-4 justify-between">
+      <div className="flex flex-col border dark:dark p-4 rounded-lg items-center md:flex-row gap-4 justify-between">
         <div className="flex flex-col max-w-xl">
-          <h1 className="text-2xl font-bold">Yatırım Fonları Nasıl Çalışır?</h1>
+          <h1 className="text-xl font-bold">Yatırım Fonları Nasıl Çalışır?</h1>
           <p className="text-lg md:mt-4">
             Yatırım fonları, birden fazla yatırımcının bir araya gelerek toplu
             bir şekilde yatırım yapmasını sağlayan kolektif yatırım araçlarıdır.
@@ -51,12 +46,7 @@ const LandingGrid = () => {
             sağlar.
           </p>
         </div>
-        <Image
-          src={LandingImageTwo}
-          width={500}
-          className="rounded-md"
-          alt="landing"
-        />
+        <Lottie animationData={HomeAnimationTwo} className="max-w-[400px]" />
       </div>
     </div>
   );

@@ -35,7 +35,7 @@ const Landing = () => {
       <div className="grid grid-cols-1 md:grid-cols-3 mt-10 gap-4">
         <HomeContent />
       </div>
-      <div className="w-full flex flex-col gap-4 mt-8  justify-center ">
+      <div className="w-full flex flex-col gap-4 md:mt-28  justify-center ">
         <LandingGrid />
       </div>
       <div className="w-full flex flex-col gap-4 mt-8 rounded-lg dark:border justify-center dark:dark p-4">
