@@ -11,11 +11,9 @@ import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/components/ui/use-toast";
-import { z } from "zod";
+import { set, z } from "zod";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
-import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
-import { auth } from "@/config/firebase";
 
 const registerSchema = z.object({
   name: z.string().nonempty().min(2),
@@ -26,17 +24,21 @@ const registerSchema = z.object({
 
 const RegisterCard = ({ title, description }) => {
   const { toast } = useToast();
+  const router = useRouter();
 
   const [name, setName] = useState("");
   const [surname, setSurname] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const handleRegister = async () => {
+    setLoading(true);
     try {
       try {
         registerSchema.parse({ name, surname, email, password });
       } catch (error) {
+        setLoading(false);
         return toast({
           description: error.errors[0].message + " " + error.errors[0].path,
           title: "Başarısız",
@@ -44,17 +46,31 @@ const RegisterCard = ({ title, description }) => {
         });
       }
 
-      const data = await createUserWithEmailAndPassword(auth, email, password);
-      await updateProfile(data.user, {
-        displayName: `${name} ${surname}`,
+      const response = await fetch("/api/register", {
+        method: "POST",
+        body: JSON.stringify({ name, surname, email, password }),
+        headers: {
+          "Content-Type": "application/json",
+        },
       });
 
-      return toast({
+      if (!response.ok) {
+        return toast({
+          title: "Başarısız",
+          variant: "destructive",
+          description: "Bir hata oluştu",
+        });
+      }
+      setLoading(false);
+      toast({
         title: "Başarılı",
         variant: "success",
         description: "Başarılı bir şekilde kayıt olundu.",
       });
+
+      return router.push("/login");
     } catch (error) {
+      setLoading(false);
       return toast({
         title: "Hata",
         variant: "destructive",
@@ -106,7 +122,7 @@ const RegisterCard = ({ title, description }) => {
             placeholder="*******"
           />
         </div>
-        <Button onClick={handleRegister} disabled>
+        <Button disabled={loading} onClick={handleRegister}>
           Kayıt Ol
         </Button>
       </CardContent>
