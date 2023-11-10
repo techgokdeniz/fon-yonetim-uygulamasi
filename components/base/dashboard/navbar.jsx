@@ -6,7 +6,7 @@ const DashboardNavbar = () => {
   const [open, setOpen] = useState(true);
 
   return (
-    <div
+    <nav
       className={`${
         open ? "w-[250px]" : "w-[80px]"
       } relative p-4 h-screen dark dark:dark`}
@@ -19,7 +19,7 @@ const DashboardNavbar = () => {
           <ChevronRightSquare />
         </button>
       </div>
-    </div>
+    </nav>
   );
 };
 

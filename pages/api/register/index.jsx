@@ -1,14 +1,21 @@
 import prisma from "../../../lib/prismadb";
 import bcrypt from "bcrypt";
+import ResponseGenerator from "@/lib/ResponseGenerator";
 
 export default async function handler(req, res) {
   if (req.method === "GET") {
     return res.status(200).json({ message: "Hello World!" });
   } else {
-    const { name, email, password } = req.body;
+    const { name, email, password, surname } = req.body;
 
-    if (!name || !email || !password) {
-      return res.status(400).json({ message: "Missing fields" });
+    if (!name || !email || !password || !surname) {
+      return ResponseGenerator(
+        res,
+        400,
+        true,
+        {},
+        "Lütfen tüm alanları doldurunuz."
+      );
     }
 
     const exist = await prisma.user.findUnique({
@@ -18,7 +25,13 @@ export default async function handler(req, res) {
     });
 
     if (exist) {
-      return res.status(400).json({ message: "User already exists" });
+      return ResponseGenerator(
+        res,
+        400,
+        true,
+        {},
+        "Bu email adresi ile daha önce kayıt olunmuş."
+      );
     }
 
     const hashedPassword = await bcrypt.hash(password, 10);
@@ -26,11 +39,12 @@ export default async function handler(req, res) {
     const user = await prisma.user.create({
       data: {
         name,
+        surname,
         email,
         hashedPassword,
       },
     });
 
-    return res.json(user);
+    return ResponseGenerator(res, 200, false, user, "Kayıt başarılı.");
   }
 }

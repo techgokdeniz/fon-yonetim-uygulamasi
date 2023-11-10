@@ -2,8 +2,9 @@ import { Toaster } from "@/components/ui/toaster";
 import "@/styles/globals.css";
 import { ThemeProvider } from "next-themes";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { SessionProvider } from "next-auth/react";
 import Head from "next/head";
+import { Provider } from "react-redux";
+import Store from "@/store/store";
 
 export default function App({ session, Component, pageProps }) {
   return (
@@ -15,12 +16,12 @@ export default function App({ session, Component, pageProps }) {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
       <ThemeProvider attribute="class" enableSystem>
-        <SessionProvider session={session}>
+        <Provider store={Store}>
           <QueryClientProvider client={new QueryClient()}>
             <Component {...pageProps} />
             <Toaster />
           </QueryClientProvider>
-        </SessionProvider>
+        </Provider>
       </ThemeProvider>
     </>
   );

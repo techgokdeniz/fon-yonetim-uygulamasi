@@ -11,13 +11,15 @@ import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/components/ui/use-toast";
-import { signIn } from "next-auth/react";
+import { useDispatch } from "react-redux";
+import { setUser } from "@/store/auth/authSlice";
 import { z } from "zod";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 
 const LoginCard = ({ title, description }) => {
   const { toast } = useToast();
+  const dispatch = useDispatch();
   const router = useRouter();
 
   const [email, setEmail] = useState("");
@@ -43,18 +45,25 @@ const LoginCard = ({ title, description }) => {
       }
 
       // Kullanıcı girişi
-      const user = await signIn("credentials", {
-        email,
-        password,
-        redirect: false,
+
+      const response = await fetch("/api/login", {
+        method: "POST",
+        body: JSON.stringify({ email, password }),
+        headers: {
+          "Content-Type": "application/json",
+        },
       });
 
-      if (!user.error) {
+      const data = await response.json();
+
+      if (!data.error) {
         toast({
           title: "Başarılı",
           variant: "success",
           description: "Başarılı bir şekilde giriş yapıldı.",
         });
+
+        dispatch(setUser(data.data));
 
         router.push("/dashboard");
       } else {

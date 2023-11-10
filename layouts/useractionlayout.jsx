@@ -1,24 +1,21 @@
 import ThemeChanger from "@/components/base/themechanger";
 import Logo from "@/components/ui/logo";
 import React from "react";
-import { useRouter } from "next/navigation";
-import { useSession } from "next-auth/react";
+import { useRouter } from "next/router";
+import { useSelector } from "react-redux";
+import { useEffect } from "react";
 
 const UserActionLayout = ({ children }) => {
-  const { push } = useRouter();
+  const router = useRouter();
+  const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
 
-  const { status, data: session } = useSession();
+  useEffect(() => {
+    if (isAuthenticated) {
+      router.push("/dashboard");
+    }
+  }, [isAuthenticated]);
 
-  if (status === "loading")
-    return (
-      <div className="p-8 w-screen h-screen flex justify-center items-center">
-        Loading...
-      </div>
-    );
-
-  if (status === "authenticated") push("/dashboard");
-
-  if (status === "unauthenticated") {
+  if (!isAuthenticated) {
     return (
       <div className="flex h-screen w-full">
         <div className="h-full w-[500px] container py-4 flex flex-col gap-4">
@@ -34,6 +31,12 @@ const UserActionLayout = ({ children }) => {
       </div>
     );
   }
+
+  return (
+    <div className="p-8 w-screen h-screen flex justify-center items-center">
+      Loading...
+    </div>
+  );
 };
 
 export default UserActionLayout;

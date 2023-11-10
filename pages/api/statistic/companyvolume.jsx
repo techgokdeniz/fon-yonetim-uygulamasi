@@ -1,4 +1,5 @@
 import baseTefasFetch from "@/hooks/baseFetch";
+import ResponseGenerator from "@/lib/ResponseGenerator";
 
 export default async function handler(req, res) {
   const { data, error } = await baseTefasFetch(
@@ -13,9 +14,11 @@ export default async function handler(req, res) {
     });
   }
 
-  res.status(200).json({
-    error: false,
-    message: "Data was successfully retrieved",
-    data: data[data.length - 2].Table,
-  });
+  return ResponseGenerator(
+    res,
+    200,
+    false,
+    data[data.length - 2].Table,
+    "Data was successfully retrieved"
+  );
 }
