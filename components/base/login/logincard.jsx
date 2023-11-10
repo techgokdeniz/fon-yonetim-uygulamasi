@@ -67,14 +67,14 @@ const LoginCard = ({ title, description }) => {
 
         router.push("/dashboard");
       } else {
-        toast({
+        return toast({
           title: "Başarısız",
           variant: "destructive",
           description: "Giriş yapılamadı.",
         });
       }
     } catch (error) {
-      toast({
+      return toast({
         description: error.message,
         title: "Başarısız",
         variant: "destructive",

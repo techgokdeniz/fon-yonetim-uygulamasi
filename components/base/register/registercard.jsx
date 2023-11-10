@@ -55,6 +55,7 @@ const RegisterCard = ({ title, description }) => {
       });
 
       if (!response.ok) {
+        setLoading(false);
         return toast({
           title: "Başarısız",
           variant: "destructive",

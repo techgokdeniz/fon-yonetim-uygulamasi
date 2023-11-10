@@ -1,9 +1,18 @@
-import { ChevronRightSquare } from "lucide-react";
+import { ChevronRightSquare, LayoutDashboard } from "lucide-react";
 import React from "react";
 import { useState } from "react";
+import Link from "next/link";
 
 const DashboardNavbar = () => {
   const [open, setOpen] = useState(true);
+
+  const MenuList = [
+    {
+      name: "Anasayfa",
+      icon: <LayoutDashboard />,
+      path: "/dashboard",
+    },
+  ];
 
   return (
     <nav
@@ -18,6 +27,18 @@ const DashboardNavbar = () => {
         >
           <ChevronRightSquare />
         </button>
+      </div>
+      <div className="mt-[4rem]">
+        <ul>
+          {MenuList.map((menu, index) => (
+            <Link key={index} href={menu.path}>
+              <li className="flex gap-4">
+                {menu.icon}
+                {open && <span>{menu.name}</span>}
+              </li>
+            </Link>
+          ))}
+        </ul>
       </div>
     </nav>
   );
