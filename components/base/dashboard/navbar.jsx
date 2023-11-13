@@ -28,6 +28,13 @@ const DashboardNavbar = () => {
           <ChevronRightSquare />
         </button>
       </div>
+      <div
+        className={`${
+          open ? "flex" : "hidden"
+        } items-center justify-center text-4xl font-bold mt-4`}
+      >
+        F
+      </div>
       <div className="mt-[4rem]">
         <ul>
           {MenuList.map((menu, index) => (
