@@ -6,7 +6,16 @@ import Head from "next/head";
 import { Provider } from "react-redux";
 import Store from "@/store/store";
 
-export default function App({ session, Component, pageProps }) {
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      retry: false,
+      refetchOnWindowFocus: false,
+    },
+  },
+});
+
+export default function App({Component, pageProps }) {
   return (
     <>
       <Head>
@@ -17,7 +26,7 @@ export default function App({ session, Component, pageProps }) {
       </Head>
       <ThemeProvider attribute="class" enableSystem>
         <Provider store={Store}>
-          <QueryClientProvider client={new QueryClient()}>
+          <QueryClientProvider client={queryClient}>
             <Component {...pageProps} />
             <Toaster />
           </QueryClientProvider>

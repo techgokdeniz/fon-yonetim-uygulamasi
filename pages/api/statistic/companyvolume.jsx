@@ -19,6 +19,6 @@ export default async function handler(req, res) {
     200,
     false,
     data[data.length - 2].Table,
-    "Data was successfully retrieved"
+    "Hacimi artışta olan Şirketler Listesi"
   );
 }
