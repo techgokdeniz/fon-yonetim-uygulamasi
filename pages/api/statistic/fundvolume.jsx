@@ -19,6 +19,6 @@ export default async function handler(req, res) {
     200,
     false,
     data[data.length - 1].Table,
-    "Data was successfully retrieved"
+    "Fon Hacmi Artışta Olan Fonlar Listesi"
   );
 }

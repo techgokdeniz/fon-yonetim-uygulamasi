@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 
 export function useExchangeRates() {
-  const { isLoading, data, error } = useQuery(["rates"], fetchRate, {
+  const { isLoading, data, error } = useQuery('rates', fetchRate, {
     refetchOnWindowFocus: false,
   });
 

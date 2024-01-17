@@ -4,7 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 
 const DashboardNavbar = () => {
-  const [open, setOpen] = useState(true);
+  const [open, setOpen] = useState(false);
 
   const MenuList = [
     {
@@ -17,8 +17,8 @@ const DashboardNavbar = () => {
   return (
     <nav
       className={`${
-        open ? "w-[250px]" : "w-[80px]"
-      } relative p-4 h-screen dark dark:dark`}
+        open ? "w-[180px]" : "w-[80px]"
+      } relative p-4 min-h-screen dark dark:dark`}
     >
       <div className="absolute dark p-2 rounded-full right-[-10px] top-5">
         <button
