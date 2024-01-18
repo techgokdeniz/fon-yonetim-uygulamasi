@@ -3,6 +3,7 @@ import { useQuery } from "@tanstack/react-query";
 import { getFundVolume } from "@/service/dashboard-service";
 import { useRouter } from "next/router";
 import StatisticTable from "@/components/base/dashboard/statistic/statistic-table";
+import { Skeleton } from "@/components/ui/skeleton";
 
 const FundVolumeTable = () => {
 
@@ -14,7 +15,7 @@ const FundVolumeTable = () => {
   });
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return  <Skeleton className='w-full h-[150px]' />
   }
 
   if (error) {

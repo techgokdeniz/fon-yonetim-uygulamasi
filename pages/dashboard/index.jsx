@@ -1,5 +1,4 @@
 import React from "react";
-
 import DashobardLayout from "@/layouts/dashobardLayout";
 import DashboardViews from "@/views/dashboard/dashboard-views";
 

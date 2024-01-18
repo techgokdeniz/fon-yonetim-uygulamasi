@@ -33,7 +33,7 @@ const UserActionLayout = ({ children }) => {
   }
 
   return (
-    <div className="p-8 w-screen h-screen flex justify-center items-center">
+    <div className="p-8 w-screen dark:dark h-screen flex justify-center items-center">
       Loading...
     </div>
   );

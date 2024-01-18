@@ -17,7 +17,7 @@ const DashboardNavbar = () => {
   return (
     <nav
       className={`${
-        open ? "w-[180px]" : "w-[80px]"
+        open ? "w-[200px]" : "w-[70px]"
       } relative p-4 min-h-screen dark dark:dark`}
     >
       <div className="absolute dark p-2 rounded-full right-[-10px] top-5">
@@ -30,7 +30,7 @@ const DashboardNavbar = () => {
       </div>
       <div
         className={`${
-          open ? "flex" : "hidden"
+          open ? "flex" : "opacity-0"
         } items-center justify-center text-4xl font-bold mt-4`}
       >
         F
