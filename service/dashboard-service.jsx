@@ -1,25 +1,20 @@
+import axiosInstance from "@/lib/axios";
+
 export const getFundVolume = async () => {
   try {
-    let response = await fetch("/api/statistic/fundvolume");
-    if (!response.ok) {
-      throw new Error(`HTTP error! Status: ${response.status}`);
-    }
-
-    return response.json();
+    const response = await axiosInstance.get("/api/statistic/fundvolume");
+    return response.data;
   } catch (error) {
-    throw new Error(`Error fetching data: ${error.message}`);
+    throw new Error(`Error fetching fund volume: ${error.response ? error.response.status : error.message}`);
   }
 };
 
 export const getCompanyVolume = async () => {
   try {
-    let response = await fetch("/api/statistic/companyvolume");
-    if (!response.ok) {
-      throw new Error(`HTTP error! Status: ${response.status}`);
-    }
-
-    return response.json();
+    const response = await axiosInstance.get("/api/statistic/companyvolume");
+    return response.data;
   } catch (error) {
-    throw new Error(`Error fetching data: ${error.message}`);
+    throw new Error(`Error fetching company volume: ${error.response ? error.response.status : error.message}`);
   }
 };
+

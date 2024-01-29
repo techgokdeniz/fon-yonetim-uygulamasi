@@ -1,8 +1,9 @@
 import { useQuery } from "@tanstack/react-query";
 
 export function useExchangeRates() {
-  const { isLoading, data, error } = useQuery('rates', fetchRate, {
-    refetchOnWindowFocus: false,
+  const { isLoading, data, error } = useQuery({
+    queryKey: "exchangeRates",
+    queryFn: fetchRate,
   });
 
   const detectedRate = ["ABD DOLARI", "EURO", "İNGİLİZ STERLİNİ"];

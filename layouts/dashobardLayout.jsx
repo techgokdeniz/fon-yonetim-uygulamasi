@@ -40,7 +40,7 @@ const DashobardLayout = ({ children, pageTitle = "Dashboard" }) => {
   }
 
   return (
-    <div className="p-8 w-screen h-screen flex justify-center items-center">
+    <div className="p-8 dark:dark w-screen h-screen flex justify-center items-center">
       Loading...
     </div>
   );

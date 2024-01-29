@@ -12,12 +12,17 @@ const DashboardNavbar = () => {
       icon: <LayoutDashboard />,
       path: "/dashboard",
     },
+    {
+      name: "Tüm Fonlar",
+      icon: <LayoutDashboard />,
+      path: "/dashboard/funds",
+    },
   ];
 
   return (
     <nav
       className={`${
-        open ? "w-[180px]" : "w-[80px]"
+        open ? "w-[200px]" : "w-[70px]"
       } relative p-4 min-h-screen dark dark:dark`}
     >
       <div className="absolute dark p-2 rounded-full right-[-10px] top-5">
@@ -30,7 +35,7 @@ const DashboardNavbar = () => {
       </div>
       <div
         className={`${
-          open ? "flex" : "hidden"
+          open ? "flex" : "opacity-0"
         } items-center justify-center text-4xl font-bold mt-4`}
       >
         F
@@ -39,7 +44,7 @@ const DashboardNavbar = () => {
         <ul>
           {MenuList.map((menu, index) => (
             <Link key={index} href={menu.path}>
-              <li className="flex gap-4">
+              <li className="flex gap-4 my-6">
                 {menu.icon}
                 {open && <span>{menu.name}</span>}
               </li>
