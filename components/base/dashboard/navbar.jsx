@@ -12,6 +12,11 @@ const DashboardNavbar = () => {
       icon: <LayoutDashboard />,
       path: "/dashboard",
     },
+    {
+      name: "Tüm Fonlar",
+      icon: <LayoutDashboard />,
+      path: "/dashboard/funds",
+    },
   ];
 
   return (
@@ -39,7 +44,7 @@ const DashboardNavbar = () => {
         <ul>
           {MenuList.map((menu, index) => (
             <Link key={index} href={menu.path}>
-              <li className="flex gap-4">
+              <li className="flex gap-4 my-6">
                 {menu.icon}
                 {open && <span>{menu.name}</span>}
               </li>

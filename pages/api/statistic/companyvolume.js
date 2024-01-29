@@ -2,6 +2,7 @@ import baseTefasFetch from "@/hooks/baseFetch";
 import ResponseGenerator from "@/lib/ResponseGenerator";
 
 export default async function handler(req, res) {
+
   const { data, error } = await baseTefasFetch(
     "/DB/getAllMainCharts",
     "dil=TR"
