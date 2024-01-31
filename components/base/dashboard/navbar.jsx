@@ -1,4 +1,9 @@
-import { ChevronRightSquare, LayoutDashboard } from "lucide-react";
+import {
+  ChevronRightSquare,
+  LayoutDashboard,
+  BringToFront,
+  GalleryVerticalEnd,
+} from "lucide-react";
 import React from "react";
 import { useState } from "react";
 import Link from "next/link";
@@ -14,15 +19,20 @@ const DashboardNavbar = () => {
     },
     {
       name: "Tüm Fonlar",
-      icon: <LayoutDashboard />,
+      icon: <GalleryVerticalEnd />,
       path: "/dashboard/funds",
+    },
+    {
+      name: "Hisse Senedi Fonları",
+      icon: <BringToFront />,
+      path: "/dashboard/funds/stocks",
     },
   ];
 
   return (
     <nav
       className={`${
-        open ? "w-[200px]" : "w-[70px]"
+        open ? "w-[240px]" : "w-[70px]"
       } relative p-4 min-h-screen dark dark:dark`}
     >
       <div className="absolute dark p-2 rounded-full right-[-10px] top-5">
@@ -44,8 +54,8 @@ const DashboardNavbar = () => {
         <ul>
           {MenuList.map((menu, index) => (
             <Link key={index} href={menu.path}>
-              <li className="flex gap-4 my-6">
-                {menu.icon}
+              <li className="flex gap-4 my-6" title={!open ? menu.name : ""}>
+                {React.cloneElement(menu.icon, { title: menu.name })}
                 {open && <span>{menu.name}</span>}
               </li>
             </Link>

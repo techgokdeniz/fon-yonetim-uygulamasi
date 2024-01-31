@@ -1,20 +1,23 @@
 import LineCharts from "@/components/base/chart/line-chart";
 import React from "react";
+import PropTypes from "prop-types";
 
-const DashboardLineChart = () => {
-  const data = [
-    { name: "Page A", uv: 400, pv: 2400, amt: 2400 },
-    { name: "Page A", uv: 200, pv: 240, amt: 2400 },
-    { name: "Page A", uv: 201, pv: 200, amt: 2400 },
-  ];
-
+const DashboardLineChart = (props) => {
   return (
     <LineCharts
-      data={data}
-      XAxisDataKey={`name`}
-      className="mt-4"
+      Datakey={props.Datakey}
+      data={props.data}
+      XAxisDataKey={props.XAxisDataKey}
+      className={props.className}
     />
   );
+};
+
+DashboardLineChart.prototype = {
+  data: PropTypes.array.isRequired,
+  XAxisDataKey: PropTypes.string.isRequired,
+  Datakey: PropTypes.string.isRequired,
+  className: PropTypes.string,
 };
 
 export default DashboardLineChart;

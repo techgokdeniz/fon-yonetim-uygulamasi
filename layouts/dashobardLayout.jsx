@@ -5,6 +5,8 @@ import ThemeChanger from "@/components/base/themechanger";
 import { useEffect } from "react";
 import { useState } from "react";
 import UserDropdownMenu from "@/components/base/userdropdown";
+import Head from "next/head";
+import LoadingSketlon from "@/components/ui/loading";
 
 const DashobardLayout = ({ children, pageTitle = "Dashboard" }) => {
   const router = useRouter();
@@ -23,25 +25,30 @@ const DashobardLayout = ({ children, pageTitle = "Dashboard" }) => {
 
   if (isAuthenticated && domLoaded) {
     return (
-      <section className="flex">
-        <DashboardNavbar />
-        <div className="flex-1 flex gap-4 flex-col items-start p-4">
-          <div className="w-full bg-gray-100/50 dark:dark p-2 flex justify-between items-center">
-            <h1 className="font-medium">{pageTitle}</h1>
-            <div className="flex gap-4">
-              <ThemeChanger />
-              <UserDropdownMenu />
+      <>
+        <Head>
+          <title>{pageTitle} - Fon Yönetim Uygulaması</title>
+        </Head>
+        <section className="flex">
+          <DashboardNavbar />
+          <div className="flex-1 flex gap-4 flex-col items-start p-4">
+            <div className="w-full bg-gray-100/50 dark:dark p-2 flex justify-between items-center">
+              <h1 className="font-medium">{pageTitle}</h1>
+              <div className="flex gap-4">
+                <ThemeChanger />
+                <UserDropdownMenu />
+              </div>
             </div>
+            {children}
           </div>
-          {children}
-        </div>
-      </section>
+        </section>
+      </>
     );
   }
 
   return (
     <div className="p-8 dark:dark w-screen h-screen flex justify-center items-center">
-      Loading...
+      <LoadingSketlon />
     </div>
   );
 };

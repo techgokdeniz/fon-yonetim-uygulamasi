@@ -3,7 +3,7 @@ import React from "react";
 
 const ProfilePage = () => {
   return (
-    <DashobardLayout pageTitle="Anasayfa / Profil">Profile</DashobardLayout>
+    <DashobardLayout pageTitle="Profil">Profile</DashobardLayout>
   );
 };
 
