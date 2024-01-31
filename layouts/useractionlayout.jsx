@@ -4,6 +4,7 @@ import React from "react";
 import { useRouter } from "next/router";
 import { useSelector } from "react-redux";
 import { useEffect } from "react";
+import LoadingSketlon from "@/components/ui/loading";
 
 const UserActionLayout = ({ children }) => {
   const router = useRouter();
@@ -34,7 +35,7 @@ const UserActionLayout = ({ children }) => {
 
   return (
     <div className="p-8 w-screen dark:dark h-screen flex justify-center items-center">
-      Loading...
+      <LoadingSketlon />
     </div>
   );
 };
