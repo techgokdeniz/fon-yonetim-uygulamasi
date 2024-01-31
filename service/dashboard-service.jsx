@@ -18,3 +18,30 @@ export const getCompanyVolume = async () => {
   }
 };
 
+export const getTotalFunds = async () => {
+  try {
+    const response = await axiosInstance.get("/api/dashboard/");
+    return response.data;
+  } catch (error) {
+    throw new Error(`Error fetching company volume: ${error.response ? error.response.status : error.message}`);
+  }
+};
+
+export const getGroupFunds = async () => {
+  try {
+    const response = await axiosInstance.get("/api/dashboard/statistic/weekly");
+    return response.data;
+  } catch (error) {
+    throw new Error(`Error fetching company volume: ${error.response ? error.response.status : error.message}`);
+  }
+};
+
+export const getMonthlyFunds = async () => {
+  try {
+    const response = await axiosInstance.get("/api/dashboard/statistic/monthly");
+    return response.data;
+  } catch (error) {
+    throw new Error(`Error fetching company volume: ${error.response ? error.response.status : error.message}`);
+  }
+};
+
