@@ -6,8 +6,28 @@ export default async function handler(req, res) {
     try {
       const start = parseInt(req.query.start) || 0;
       const length = parseInt(req.query.length) || 10;
+      const search = req.query.search || "";
 
       const funds = await prisma.funds.findMany({
+        where: {
+          OR: [
+            {
+              name: {
+                contains: search,
+                mode: 'insensitive',
+              },
+            },
+            {
+              fundCode: {
+                contains: search,
+                mode: 'insensitive',
+              },
+            },
+          ],
+        },
+        orderBy: {
+          fundCode: "asc",
+        },
         select: {
           name: true,
           fundCode: true,
@@ -21,7 +41,7 @@ export default async function handler(req, res) {
         200,
         false,
         funds,
-        "Fonlar Basariyla Getirildi."
+        "Fonlar Başarıyla Getirildi."
       );
     } catch (err) {
       return ResponseGenerator(
@@ -29,10 +49,10 @@ export default async function handler(req, res) {
         500,
         true,
         err.message,
-        "Serverda bir hata olustu"
+        "Sunucuda bir hata oluştu"
       );
     }
   } else {
-    return ResponseGenerator(res, 400, true, {}, "Method desteklenmiyor.");
+    return ResponseGenerator(res, 400, true, {}, "Metod desteklenmiyor.");
   }
 }
