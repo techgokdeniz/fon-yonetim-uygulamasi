@@ -54,7 +54,7 @@ const DashboardNavbar = () => {
         <ul>
           {MenuList.map((menu, index) => (
             <Link key={index} href={menu.path}>
-              <li className="flex gap-4 my-6" title={!open ? menu.name : ""}>
+              <li className={`flex gap-4 my-6 items-center ${!open && "justify-center"}`} title={!open ? menu.name : ""}>
                 {React.cloneElement(menu.icon, { title: menu.name })}
                 {open && <span>{menu.name}</span>}
               </li>
