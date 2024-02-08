@@ -3,6 +3,7 @@ import {
   LayoutDashboard,
   BringToFront,
   GalleryVerticalEnd,
+  BarChart2,
 } from "lucide-react";
 import React from "react";
 import { useState } from "react";
@@ -16,6 +17,11 @@ const DashboardNavbar = () => {
       name: "Anasayfa",
       icon: <LayoutDashboard />,
       path: "/dashboard",
+    },
+    {
+      name: "Günlük Veriler",
+      icon: <BarChart2 />,
+      path: "/dashboard/daily",
     },
     {
       name: "Tüm Fonlar",

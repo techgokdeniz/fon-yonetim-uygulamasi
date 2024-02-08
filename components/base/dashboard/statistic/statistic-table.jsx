@@ -10,6 +10,7 @@ import {
 } from "@/components/ui/table";
 
 const StatisticTable = (props) => {
+  console.log(props);
   const tableHeaders = Object.keys(props?.data[0] || {});
 
   return (
