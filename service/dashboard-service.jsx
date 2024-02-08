@@ -45,3 +45,12 @@ export const getMonthlyFunds = async () => {
   }
 };
 
+export const getDailyStats = async () => {
+  try {
+    const response = await axiosInstance.get("/api/dashboard/statistic/dailystats");
+    return response.data;
+  } catch (error) {
+    throw new Error(`Error fetching fund volume: ${error.response ? error.response.status : error.message}`);
+  }
+};
+

@@ -5,7 +5,7 @@ export default async function handler(req, res) {
   if (req.method === "GET") {
     try {
       const start = parseInt(req.query.start) || 0;
-      const length = parseInt(req.query.length) || 10;
+      const length = parseInt(req.query.length) || 12;
       const search = req.query.search || "";
 
       const funds = await prisma.funds.findMany({
@@ -14,26 +14,23 @@ export default async function handler(req, res) {
             {
               name: {
                 contains: search,
-                mode: 'insensitive',
+                mode: "insensitive",
               },
             },
             {
               fundCode: {
                 contains: search,
-                mode: 'insensitive',
+                mode: "insensitive",
               },
             },
           ],
-        },
-        orderBy: {
-          fundCode: "asc",
         },
         select: {
           name: true,
           fundCode: true,
         },
-        skip: start,
-        take: length,
+        skip: search ? 0 : start,
+        take: search ? 12 : length,
       });
 
       return ResponseGenerator(

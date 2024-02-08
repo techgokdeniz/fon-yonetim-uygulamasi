@@ -1,37 +1,43 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
 generator client {
-    provider = "prisma-client-js"
+  provider = "prisma-client-js"
 }
 
 datasource db {
-    provider = "postgresql"
-    url      = env("DATABASE_URL")
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
 }
 
 model User {
-    id             String    @id @default(cuid())
-    name           String?
-    surname        String?
-    hashedPassword String?
-    Role           Role      @default(USER)
-    email          String?   @unique
-    emailVerified  DateTime?
-    image          String?
-    createdAt      DateTime  @default(now())
-    updatedAt      DateTime  @updatedAt
+  name           String?
+  email          String?   @unique
+  createdAt      DateTime  @default(now())
+  updatedAt      DateTime  @updatedAt
+  id             String    @id @default(cuid())
+  emailVerified  DateTime?
+  image          String?
+  surname        String?
+  Role           Role      @default(USER)
+  hashedPassword String?
 }
 
 model Funds {
-    id        String   @id @default(cuid())
-    name      String
-    fundCode  String
-    createdAt DateTime @default(now())
-    updatedAt DateTime @updatedAt
+  id                String    @id @default(cuid())
+  name              String
+  fundCode          String
+  createdAt         DateTime  @default(now())
+  updatedAt         DateTime  @updatedAt
+  yatirimciSayisi   Int       @default(0)
+  yatirimciDegisimi Int       @default(0)
+  gunlukGetiri      Float     @default(0)
+  type              FundsType @default(TEFAS)
 }
 
 enum Role {
-    ADMIN
-    USER
+  ADMIN
+  USER
+}
+
+enum FundsType {
+  TEFAS
+  PENSION
 }

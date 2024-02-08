@@ -3,6 +3,7 @@ import {
   LayoutDashboard,
   BringToFront,
   GalleryVerticalEnd,
+  BarChart2,
 } from "lucide-react";
 import React from "react";
 import { useState } from "react";
@@ -16,6 +17,11 @@ const DashboardNavbar = () => {
       name: "Anasayfa",
       icon: <LayoutDashboard />,
       path: "/dashboard",
+    },
+    {
+      name: "Günlük Veriler",
+      icon: <BarChart2 />,
+      path: "/dashboard/daily",
     },
     {
       name: "Tüm Fonlar",
@@ -54,7 +60,7 @@ const DashboardNavbar = () => {
         <ul>
           {MenuList.map((menu, index) => (
             <Link key={index} href={menu.path}>
-              <li className="flex gap-4 my-6" title={!open ? menu.name : ""}>
+              <li className={`flex gap-4 my-6 items-center ${!open && "justify-center"}`} title={!open ? menu.name : ""}>
                 {React.cloneElement(menu.icon, { title: menu.name })}
                 {open && <span>{menu.name}</span>}
               </li>
