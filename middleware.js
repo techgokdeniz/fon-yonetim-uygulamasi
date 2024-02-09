@@ -3,7 +3,7 @@ import verifyJwt from "./lib/verifyJwt";
 
 export async function middleware(req) {
 
-  if (!process.env.NODE_ENV === "development") {
+  if (process.env.NODE_ENV != "development") {
     let token = req.headers.get("authorization")?.split(" ")[1];
     let verify = await verifyJwt(token);
 
