@@ -47,7 +47,16 @@ export const getMonthlyFunds = async () => {
 
 export const getDailyStats = async () => {
   try {
-    const response = await axiosInstance.get("/api/dashboard/statistic/dailystats");
+    const response = await axiosInstance.get("/api/dashboard/statistic/dailystats?type=1");
+    return response.data;
+  } catch (error) {
+    throw new Error(`Error fetching fund volume: ${error.response ? error.response.status : error.message}`);
+  }
+};
+
+export const getPensionDailyStats = async () => {
+  try {
+    const response = await axiosInstance.get("/api/dashboard/statistic/dailystats?type=2");
     return response.data;
   } catch (error) {
     throw new Error(`Error fetching fund volume: ${error.response ? error.response.status : error.message}`);
