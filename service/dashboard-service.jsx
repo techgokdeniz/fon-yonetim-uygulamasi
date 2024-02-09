@@ -63,3 +63,15 @@ export const getPensionDailyStats = async () => {
   }
 };
 
+export const fetchFunds = async (page, search) => {
+  try {
+    const query = new URLSearchParams({ start: page * 10, limit: 10 });
+    if (search) {
+      query.append("search", search);
+    }
+    const response = await axiosInstance.get(`/api/dashboard/getfunds?${query.toString()}`);
+    return response.data;
+  } catch (error) {
+    throw new Error(`Error fetching fund volume: ${error.response ? error.response.status : error.message}`);
+  }
+};
