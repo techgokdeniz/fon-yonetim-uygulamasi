@@ -4,6 +4,7 @@ import {
   BringToFront,
   GalleryVerticalEnd,
   BarChart2,
+  BarChart3
 } from "lucide-react";
 import React from "react";
 import { useState } from "react";
@@ -19,9 +20,14 @@ const DashboardNavbar = () => {
       path: "/dashboard",
     },
     {
-      name: "Günlük Veriler",
+      name: "Günlük  Veriler (Tefas)",
       icon: <BarChart2 />,
-      path: "/dashboard/daily",
+      path: "/dashboard/daily/tefas",
+    },
+    {
+      name: "Günlük  Veriler (Emeklilik)",
+      icon: <BarChart3 />,
+      path: "/dashboard/daily/pension",
     },
     {
       name: "Tüm Fonlar",
@@ -38,7 +44,7 @@ const DashboardNavbar = () => {
   return (
     <nav
       className={`${
-        open ? "w-[240px]" : "w-[70px]"
+        open ? "w-[280px]" : "w-[70px]"
       } relative p-4 min-h-screen dark dark:dark`}
     >
       <div className="absolute dark p-2 rounded-full right-[-10px] top-5">

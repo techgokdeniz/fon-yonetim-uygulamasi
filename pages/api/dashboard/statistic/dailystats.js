@@ -5,10 +5,25 @@ let prisma = new PrismaClient();
 
 export default async function handler(req, res) {
   if (req.method === "GET") {
+
+    let type;
+    switch (req.query.type) {
+      case "1":
+        type = "TEFAS";
+        break;
+      case "2":
+        type = "PENSION";
+        break;
+      default:
+        type = "TEFAS";
+        break;
+    }
+
+
     try {
       const dailyIncreaseInvestors = await prisma.funds.findMany({
         where: {
-          type: "TEFAS",
+          type: type.toString(),
         },
         orderBy: {
           yatirimciDegisimi: "desc",
@@ -29,9 +44,9 @@ export default async function handler(req, res) {
 
       const dailyTopWinner = await prisma.funds.findMany({
         where: {
-          type: "TEFAS",
+          type: type.toString(),
           yatirimciSayisi: {
-            gte: 500,
+            gte: 1000,
           },
         },
         orderBy: {
@@ -53,7 +68,7 @@ export default async function handler(req, res) {
 
       const dailyTopLost = await prisma.funds.findMany({
         where: {
-          type: "TEFAS",
+          type: type.toString(),
           yatirimciSayisi: {
             gte: 100,
           },
@@ -75,7 +90,7 @@ export default async function handler(req, res) {
 
       const dailyMostInvestors = await prisma.funds.findMany({
         where: {
-          type: "TEFAS",
+          type: type.toString(),
         },
         orderBy: {
           yatirimciSayisi: "desc",
