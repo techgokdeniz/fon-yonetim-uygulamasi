@@ -5,18 +5,7 @@ import { useSearchParams } from "next/navigation";
 import { useQuery } from "@tanstack/react-query";
 import { Skeleton } from "@/components/ui/skeleton";
 import SearchInput from "@/components/base/dashboard/funds/search-input";
-
-const fetchFunds = async (page, search) => {
-  const query = new URLSearchParams({ start: page * 10, limit: 10 });
-  if (search) {
-    query.append("search", search);
-  }
-  const response = await fetch(`/api/dashboard/getfunds?${query.toString()}`);
-  if (!response.ok) {
-    throw new Error('Network response was not ok');
-  }
-  return response.json();
-};
+import { fetchFunds } from "@/service/dashboard-service";
 
 const FundsView = () => {
   const searchParams = useSearchParams();
